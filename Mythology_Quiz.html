@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ταξίδι στους Μύθους</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 50%, #87CEEB 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2c3e50;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 3px solid #3498db;
+        }
+        
+        .title {
+            font-size: 2.5em;
+            color: #e74c3c;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .btn.success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .btn.danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .score {
+            font-size: 1.5em;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .timer {
+            font-size: 2em;
+            color: #e74c3c;
+            font-weight: bold;
+            min-width: 100px;
+        }
+        
+        .question {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: inherit;
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .results {
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(236, 240, 241, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .wrong-answer {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .hero-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            background: rgba(52, 152, 219, 1);
+            transform: scale(1.1);
+        }
+        
+        .player-name-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: inherit;
+        }
+        
+        .player-name-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .high-scores {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #f39c12;
+        }
+        
+        .high-scores h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .score-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: rgba(241, 196, 15, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .score-entry.current-player {
+            background: rgba(231, 76, 60, 0.2);
+            border-left-color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <button class="music-control" onclick="toggleMusic()">🎵</button>
+    
+    <div class="container">
+        <!-- Αρχική Οθόνη -->
+        <div id="homeScreen">
+            <div class="hero-icon">🏛️⚔️🛡️</div>
+            <h1 class="title">Ταξίδι στους Μύθους</h1>
+           <p class="subtitle">
+                <span style="color: #e74c3c; font-weight: bold;">Ο Ηρακλής</span>, 
+                <span style="color: #3498db; font-weight: bold;">ο Θησέας</span>, 
+                <span style="color: #f1c40f; font-weight: bold;">ο Οδυσσέας</span> και 
+                <span style="color: #27ae60; font-weight: bold;">ο Ιάσονας</span>!
+            </p> 
+            <h2>Παιχνίδι γνώσεων κατάλληλο για παιδιά ηλικίας 8 και άνω</h2>
+            
+            <input type="text" class="player-name-input" id="playerNameInput" placeholder="Γράψε το όνομά σου...">
+            
+            <div class="high-scores" id="highScoresDisplay">
+                <h3>🏆 Κορυφαίοι Παίκτες</h3>
+                <div id="highScoresList">Δεν υπάρχουν ακόμη αποτελέσματα</div>
+            </div>
+            
+            <button class="btn" onclick="startGame()">🎮 Έναρξη Παιχνιδιού</button>
+            <button class="btn secondary" onclick="showSettings()">⚙️ Ρυθμίσεις</button>
+            <button class="btn" onclick="clearHighScores()">🗑️ Καθαρισμός Σκορ</button>
+            <button class="btn danger" onclick="exitGame()">🚪 Έξοδος</button>
+        </div>
+        
+        <!-- Οθόνη Ρυθμίσεων -->
+        <div id="settingsScreen" class="hidden">
+            <h2>Ρυθμίσεις</h2>
+            <button class="btn" onclick="toggleMusic()">🎵 Μουσική: <span id="musicStatus">Ενεργή</span></button>
+            <button class="btn secondary" onclick="backToHome()">🏠 Πίσω στο Μενού</button>
+        </div>
+        
+        <!-- Οθόνη Παιχνιδιού -->
+        <div id="gameScreen" class="hidden">
+            <div class="game-header">
+                <div class="score">Παίκτης: <span id="currentPlayerName">Άγνωστος</span></div>
+                <div class="score">Σκορ: <span id="score">0</span></div>
+                <div class="timer" id="timer">20</div>
+                <div>Ερώτηση: <span id="currentQuestion">1</span>/<span id="totalQuestions">15</span></div>
+            </div>
+            
+            <div class="question" id="question">Φόρτωση ερώτησης...</div>
+            
+            <input type="text" class="answer-input" id="answerInput" placeholder="Γράψε την απάντησή σου εδώ...">
+            
+            <div class="controls">
+                <button class="btn success" onclick="submitAnswer()">✓ Υποβολή</button>
+                <button class="btn secondary" onclick="pauseGame()">⏸️ Παύση</button>
+                <button class="btn danger" onclick="backToHome()">🏠 Κυρίως Μενού</button>
+            </div>
+        </div>
+        
+        <!-- Οθόνη Παύσης -->
+        <div id="pauseScreen" class="hidden">
+            <h2>⏸️ Παύση</h2>
+            <p>Το παιχνίδι είναι σε παύση</p>
+            <button class="btn success" onclick="resumeGame()">▶️ Συνέχεια</button>
+            <button class="btn danger" onclick="backToHome()">🏠 Κυρίως Μενού</button>
+        </div>
+        
+        <!-- Οθόνη Αποτελεσμάτων -->
+        <div id="resultsScreen" class="hidden">
+            <h2>🎯 Αποτελέσματα</h2>
+            <div class="score">Τελικό Σκορ: <span id="finalScore">0</span>/150</div>
+            <div id="resultMessage"></div>
+            <div class="results" id="wrongAnswers"></div>
+            <button class="btn success" onclick="startGame()">🔄 Παίξε Ξανά</button>
+            <button class="btn secondary" onclick="backToHome()">🏠 Κυρίως Μενού</button>
+        </div>
+    </div>
+    
+    <script>
+        // Δήλωση όλων των μεταβλητών
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let gameActive = false;
+        let timeLeft = 20;
+        let timer = null;
+        let playerName = '';
+        let highScores = [];
+        let musicEnabled = true;
+        let musicPlaying = false;
+        let audioContext = null;
+        let musicTimeout = null;
+        
+        // Φόρτωση high scores από localStorage
+        try {
+            const saved = localStorage.getItem('mythologyHighScores');
+            if (saved) {
+                highScores = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.log('Δεν μπορούν να φορτωθούν τα σκορ');
+            highScores = [];
+        }
+        
+        // Δεδομένα παιχνιδιού
+        const questions = [
+            { question: "Ποιος ήρωας είχε απίστευτη δύναμη και έκανε 12 άθλους;", answer: "ηρακλής", alternatives: ["ηρακλησ", "iraklis", "hercules"] },
+            { question: "Ποιος ήρωας σκότωσε τον Μινώταυρο;", answer: "θησέας", alternatives: ["θησεας", "theseus", "thiseas"] },
+            { question: "Ποιος ήρωας ταξίδευε για 10 χρόνια για να γυρίσει σπίτι του;", answer: "οδυσσέας", alternatives: ["οδυσσεας", "odysseus", "odysseas"] },
+            { question: "Ποιος ήρωας πήγε να βρει το Χρυσόμαλλο Δέρας;", answer: "ιάσονας", alternatives: ["ιασονας", "jason", "iasonas"] },
+            { question: "Πόσους άθλους έκανε ο Ηρακλής;", answer: "12", alternatives: ["δώδεκα", "δωδεκα", "twelve"] },
+            { question: "Ποιο πλάσμα είχε κεφάλι ταύρου και σώμα ανθρώπου;", answer: "μινώταυρος", alternatives: ["μινωταυρος", "minotaur", "minotauros"] },
+            { question: "Σε Ποιο νησί ήταν βασιλιάς ο Οδυσσέας;", answer: "ιθάκη", alternatives: ["ιθακη", "ithaca", "ithaki"] },
+            { question: "Ποιο χρώμα είχε το δέρας που αναζητούσε ο Ιάσονας;", answer: "χρυσό", alternatives: ["χρυσο", "gold", "χρυσαφί"] },
+            { question: "Πώς λέγονταν οι ναυτικοί του Ιάσονα;", answer: "αργοναύτες", alternatives: ["αργοναυτες", "argonauts", "argonautes"] },
+            { question: "Ποιος θεός έδωσε δύναμη στον Ηρακλή;", answer: "ζευς", alternatives: ["zeus", "δίας", "dias"] },
+            { question: "Σε ποιο λαβύρινθο ζούσε ο Μινώταυρος;", answer: "κνωσού", alternatives: ["κνωσος", "κνωσου"] },
+            { question: "Ποιο τέρας με πολλά κεφάλια σκότωσε ο Ηρακλής;", answer: " λερναία ύδρα", alternatives: ["λερναια υδρα", "λερναία"] },
+            { question: "Τι ζώα έπρεπε να φέρει ο Ηρακλής από ένα μακρινό νησί, τα οποία φύλαγε ένας γίγαντας με τρία σώματα;;", answer: "βόδια", alternatives: ["βοδια", "cattle", "αγελάδες"] },
+            { question: "Πώς λεγόταν ο βασιλιάς του νησιού από τον οποίο έκλεψε ο Ηρακλής τα βόδια;", answer: "γηρυόνης", alternatives: ["γηρυονης", "geryon", "γηρυονας"] },
+            { question: "Ποιος βασιλιάς έδωσε τους 12 άθλους στον Ηρακλή;", answer: "ευρυσθέας", alternatives: ["ευρυσθεας", "eurystheus", "eurystheas"] },
+            { question: "Ποιο νήμα χρησιμοποίησε ο Θησέας για να βγει από το λαβύρινθο;", answer: "αριάδνης", alternatives: ["αριαδνης", "ariadne", "κλωστή"] }
+        ];
+        
+        // Δημιουργία παιδικής μελωδίας με Web Audio API
+        function createHappyTune() {
+            const notes = [
+                { freq: 523.25, duration: 0.4 }, // C5
+                { freq: 587.33, duration: 0.4 }, // D5
+                { freq: 659.25, duration: 0.4 }, // E5
+                { freq: 698.46, duration: 0.4 }, // F5
+                { freq: 783.99, duration: 0.4 }, // G5
+                { freq: 659.25, duration: 0.4 }, // E5
+                { freq: 523.25, duration: 0.8 }, // C5
+                { freq: 587.33, duration: 0.4 }, // D5
+                { freq: 659.25, duration: 0.4 }, // E5
+                { freq: 523.25, duration: 0.8 }  // C5
+            ];
+            
+            return notes;
+        }
+        
+        function playNote(frequency, duration, startTime) {
+            if (!audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, startTime);
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, startTime);
+            gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            
+            oscillator.start(startTime);
+            oscillator.stop(startTime + duration);
+        }
+        
+        function playHappyTune() {
+            if (!audioContext || !musicEnabled || !musicPlaying) return;
+            
+            const notes = createHappyTune();
+            const startTime = audioContext.currentTime;
+            let currentTime = startTime;
+            
+            notes.forEach(note => {
+                playNote(note.freq, note.duration, currentTime);
+                currentTime += note.duration;
+            });
+            
+            // Επανάληψη της μελωδίας
+            if (musicPlaying && musicEnabled) {
+                musicTimeout = setTimeout(() => {
+                    if (musicPlaying && musicEnabled) {
+                        playHappyTune();
+                    }
+                }, (currentTime - startTime) * 1000 + 1000);
+            }
+        }
+        
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+        
+        function toggleMusic() {
+    if (musicEnabled) {
+        // Σβήνουμε τη μουσική
+        musicEnabled = false;
+        musicPlaying = false;
+        if (musicTimeout) {
+            clearTimeout(musicTimeout);
+            musicTimeout = null;
+        }
+        // Ενημέρωση όλων των στοιχείων που δείχνουν την κατάσταση
+        const statusElements = document.querySelectorAll('#musicStatus');
+        statusElements.forEach(el => el.textContent = 'Ανενεργή');
+        
+        // Ενημέρωση του κουμπιού μουσικής
+        const musicButton = document.querySelector('.music-control');
+        if (musicButton) {
+            musicButton.textContent = '🔇';
+        }
+    } else {
+        // Ανοίγουμε τη μουσική
+        musicEnabled = true;
+        musicPlaying = true;
+        
+        // Ενημέρωση όλων των στοιχείων που δείχνουν την κατάσταση
+        const statusElements = document.querySelectorAll('#musicStatus');
+        statusElements.forEach(el => el.textContent = 'Ενεργή');
+        
+        // Ενημέρωση του κουμπιού μουσικής
+        const musicButton = document.querySelector('.music-control');
+        if (musicButton) {
+            musicButton.textContent = '🎵';
+        }
+        
+        initAudioContext();
+        playHappyTune();
+    }
+}
+        
+        function showScreen(screenId) {
+            const screens = ['homeScreen', 'settingsScreen', 'gameScreen', 'pauseScreen', 'resultsScreen'];
+            screens.forEach(screen => {
+                document.getElementById(screen).classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+        
+        function startGame() {
+            // Έλεγχος ονόματος παίκτη
+            const nameInput = document.getElementById('playerNameInput').value.trim();
+            if (nameInput === '') {
+                alert('Παρακαλώ γράψε το όνομά σου πρώτα!');
+                document.getElementById('playerNameInput').focus();
+                return;
+            }
+            
+            playerName = nameInput;
+            document.getElementById('currentPlayerName').textContent = playerName;
+            
+            // Επαναφορά μεταβλητών παιχνιδιού
+            currentQuestionIndex = 0;
+            score = 0;
+            wrongAnswers = [];
+            gameActive = true;
+            timeLeft = 20;
+            
+            document.getElementById('score').textContent = score;
+            document.getElementById('totalQuestions').textContent = questions.length;
+            
+            showScreen('gameScreen');
+            loadQuestion();
+            startTimer();
+        }
+        
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                endGame();
+                return;
+            }
+            
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = question.question;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+            
+            timeLeft = 20;
+            updateTimer();
+        }
+        
+        function startTimer() {
+            // Καθαρισμός προηγούμενου timer
+            if (timer) {
+                clearInterval(timer);
+            }
+            
+            timer = setInterval(() => {
+                if (!gameActive) {
+                    clearInterval(timer);
+                    return;
+                }
+                
+                timeLeft--;
+                updateTimer();
+                
+                if (timeLeft <= 0) {
+                    submitAnswer();
+                }
+            }, 1000);
+        }
+        
+        function updateTimer() {
+            const timerElement = document.getElementById('timer');
+            if (timerElement) {
+                timerElement.textContent = timeLeft;
+                timerElement.style.color = timeLeft <= 5 ? '#e74c3c' : '#2c3e50';
+            }
+        }
+        
+        function submitAnswer() {
+            if (!gameActive) return;
+            
+            clearInterval(timer);
+            
+            const userAnswer = document.getElementById('answerInput').value.toLowerCase().trim();
+            const question = questions[currentQuestionIndex];
+            const correctAnswer = question.answer;
+            const alternatives = question.alternatives || [];
+            
+            // Κανονικοποίηση απάντησης (αφαίρεση τόνων)
+            const normalizeAnswer = (answer) => {
+                return answer.replace(/[άαάα]/g, 'α')
+                            .replace(/[έεέε]/g, 'ε')
+                            .replace(/[ήηήη]/g, 'η')
+                            .replace(/[ίιίι]/g, 'ι')
+                            .replace(/[όοόο]/g, 'ο')
+                            .replace(/[ύυύυ]/g, 'υ')
+                            .replace(/[ώωώω]/g, 'ω')
+                            .replace(/\s+/g, '');
+            };
+            
+            const normalizedUserAnswer = normalizeAnswer(userAnswer);
+            const normalizedCorrectAnswer = normalizeAnswer(correctAnswer);
+            const normalizedAlternatives = alternatives.map(alt => normalizeAnswer(alt));
+            
+            if (normalizedUserAnswer === normalizedCorrectAnswer || 
+                normalizedAlternatives.includes(normalizedUserAnswer)) {
+                score += 10;
+                document.getElementById('score').textContent = score;
+            } else {
+                wrongAnswers.push({
+                    question: question.question,
+                    userAnswer: userAnswer || '(Καμία απάντηση)',
+                    correctAnswer: correctAnswer
+                });
+            }
+            
+            currentQuestionIndex++;
+            
+            setTimeout(() => {
+                if (gameActive) {
+                    loadQuestion();
+                    startTimer();
+                }
+            }, 1000);
+        }
+        
+        function pauseGame() {
+            clearInterval(timer);
+            gameActive = false;
+            showScreen('pauseScreen');
+        }
+        
+        function resumeGame() {
+            gameActive = true;
+            showScreen('gameScreen');
+            startTimer();
+        }
+        
+        function endGame() {
+            clearInterval(timer);
+            gameActive = false;
+            
+            // Προσθήκη στα high scores
+            if (playerName && score >= 0) {
+                const newScore = {
+                    name: playerName,
+                    score: score,
+                    date: new Date().toLocaleDateString('el-GR')
+                };
+                
+                highScores.push(newScore);
+                highScores.sort((a, b) => b.score - a.score);
+                highScores = highScores.slice(0, 10); // Κρατάμε τα 10 καλύτερα
+                
+                // Αποθήκευση στο localStorage
+                try {
+                    localStorage.setItem('mythologyHighScores', JSON.stringify(highScores));
+                } catch (e) {
+                    console.log('Δεν μπορεί να αποθηκευτεί το σκορ');
+                }
+            }
+            
+            document.getElementById('finalScore').textContent = score;
+            
+            // Μήνυμα βάσει σκορ
+            let message = '';
+            if (score >= 130) {
+                message = '🏆 Εξαιρετικά! Είσαι πραγματικός ειδήμονας της μυθολογίας!';
+            } else if (score >= 100) {
+                message = '⭐ Πολύ καλά! Γνωρίζεις πολλά για τους ήρωες!';
+            } else if (score >= 70) {
+                message = '👍 Καλά! Συνέχισε να διαβάζεις για τους μύθους!';
+            } else {
+                message = '📚 Χρειάζεσαι περισσότερη μελέτη, αλλά μην τα παρατάς!';
+            }
+            
+            document.getElementById('resultMessage').innerHTML = `<p style="font-size: 1.2em; margin: 20px 0;">${message}</p>`;
+            
+            // Εμφάνιση λανθασμένων απαντήσεων
+            const wrongAnswersDiv = document.getElementById('wrongAnswers');
+            if (wrongAnswers.length > 0) {
+                wrongAnswersDiv.innerHTML = '<h3>❌ Λανθασμένες Απαντήσεις:</h3>';
+                wrongAnswers.forEach((wrong, index) => {
+                    wrongAnswersDiv.innerHTML += `
+                        <div class="wrong-answer">
+                            <strong>Ερώτηση ${index + 1}:</strong> ${wrong.question}<br>
+                            <strong>Η απάντησή σου:</strong> ${wrong.userAnswer}<br>
+                            <strong>Σωστή απάντηση:</strong> <span class="correct-answer">${wrong.correctAnswer}</span>
+                        </div>
+                    `;
+                });
+            } else {
+                wrongAnswersDiv.innerHTML = '<h3>🎉 Τέλεια! Δεν έκανες κανένα λάθος!</h3>';
+            }
+            
+            showScreen('resultsScreen');
+        }
+        
+        function showSettings() {
+            showScreen('settingsScreen');
+        }
+        
+        function backToHome() {
+            clearInterval(timer);
+            gameActive = false;
+            showScreen('homeScreen');
+            updateHighScoresDisplay();
+        }
+        
+        function updateHighScoresDisplay() {
+            const highScoresList = document.getElementById('highScoresList');
+            
+            if (highScores.length === 0) {
+                highScoresList.innerHTML = 'Δεν υπάρχουν ακόμη αποτελέσματα';
+                return;
+            }
+            
+            let html = '';
+            highScores.forEach((score, index) => {
+                const isCurrentPlayer = score.name === playerName;
+                html += `
+                    <div class="score-entry ${isCurrentPlayer ? 'current-player' : ''}">
+                        <span>${index + 1}. ${score.name}</span>
+                        <span>${score.score}/150</span>
+                    </div>
+                `;
+            });
+            
+            highScoresList.innerHTML = html;
+        }
+        
+        function clearHighScores() {
+            if (confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις όλα τα σκορ;')) {
+                highScores = [];
+                try {
+                    localStorage.removeItem('mythologyHighScores');
+                } catch (e) {
+                    console.log('Δεν μπορεί να διαγραφεί το σκορ');
+                }
+                updateHighScoresDisplay();
+            }
+        }
+        
+        function exitGame() {
+            if (confirm('Είσαι σίγουρος ότι θέλεις να φύγεις από το παιχνίδι;')) {
+                window.close();
+            }
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHighScoresDisplay();
+            document.getElementById('musicStatus').textContent = musicEnabled ? 'Ενεργή' : 'Ανενεργή';
+            
+            // Enter key για υποβολή απάντησης
+            document.getElementById('answerInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitAnswer();
+                }
+            });
+            
+            // Enter key για έναρξη παιχνιδιού
+            document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startGame();
+                }
+            });
+        });
+        
+        // Αρχικοποίηση μουσικής όταν ο χρήστης αλληλεπιδρά με τη σελίδα
+        document.addEventListener('click', function() {
+            if (musicEnabled && !musicPlaying) {
+                musicPlaying = true;
+                initAudioContext();
+                playHappyTune();
+            }
+        }, { once: true });
+    </script>
+    
+    <div class="footer">
+        Greek Mythology V.01 - © Gallis Dimitris 2025 - All rights reserved.
+    </div>
+</body>
+</html>
