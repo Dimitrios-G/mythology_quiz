@@ -294,7 +294,7 @@
                 <div class="score">Παίκτης: <span id="currentPlayerName">Άγνωστος</span></div>
                 <div class="score">Σκορ: <span id="score">0</span></div>
                 <div class="timer" id="timer">20</div>
-                <div>Ερώτηση: <span id="currentQuestion">1</span>/<span id="totalQuestions">15</span></div>
+                <div>Ερώτηση: <span id="currentQuestion">1</span>/<span id="totalQuestions">16</span></div>
             </div>
             
             <div class="question" id="question">Φόρτωση ερώτησης...</div>
@@ -319,7 +319,7 @@
         <!-- Οθόνη Αποτελεσμάτων -->
         <div id="resultsScreen" class="hidden">
             <h2>🎯 Αποτελέσματα</h2>
-            <div class="score">Τελικό Σκορ: <span id="finalScore">0</span>/150</div>
+            <div class="score">Τελικό Σκορ: <span id="finalScore">0</span>/160</div>
             <div id="resultMessage"></div>
             <div class="results" id="wrongAnswers"></div>
             <button class="btn success" onclick="startGame()">🔄 Παίξε Ξανά</button>
@@ -649,7 +649,7 @@
             
             // Μήνυμα βάσει σκορ
             let message = '';
-            if (score >= 130) {
+            if (score >= 140) {
                 message = '🏆 Εξαιρετικά! Είσαι πραγματικός ειδήμονας της μυθολογίας!';
             } else if (score >= 100) {
                 message = '⭐ Πολύ καλά! Γνωρίζεις πολλά για τους ήρωες!';
@@ -706,7 +706,7 @@
                 html += `
                     <div class="score-entry ${isCurrentPlayer ? 'current-player' : ''}">
                         <span>${index + 1}. ${score.name}</span>
-                        <span>${score.score}/150</span>
+                        <span>${score.score}/160</span>
                     </div>
                 `;
             });
