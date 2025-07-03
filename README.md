@@ -14,10 +14,9 @@
 
 ## Οδηγίες
 
-1. Άνοιξε το αρχείο `Mythology_Quiz.html` σε έναν browser.
-2. Γράψε το όνομά σου και πάτα "Έναρξη Παιχνιδιού".
-3. Απάντησε στις ερωτήσεις μέσα στο χρόνο που σου δίνεται.
-4. Δες τα αποτελέσματά σου και προσπάθησε να βελτιώσεις τη βαθμολογία σου.
+1. Γράψε το όνομά σου και πάτα "Έναρξη Παιχνιδιού".
+2. Απάντησε στις ερωτήσεις μέσα στο χρόνο που σου δίνεται.
+3. Δες τα αποτελέσματά σου και προσπάθησε να βελτιώσεις τη βαθμολογία σου.
 
 ---
 
@@ -37,21 +36,16 @@
 
 ## Instructions
 
-1. Open `Mythology_Quiz.html` in your browser.
-2. Enter your name and click "Start Game".
-3. Answer the questions within the time limit.
-4. Check your results and try to improve your score.
+1. Enter your name and click "Start Game".
+2. Answer the questions within the time limit.
+3. Check your results and try to improve your score.
 
 ---
 
-## Σύντομη περιγραφή για GitHub
-
+## Σύντομη περιγραφή
 **Ελληνικά:**
 Ένα παιδικό quiz με θέμα την ελληνική μυθολογία, με τους άθλους του Ηρακλή και άλλους ήρωες. Μαθαίνεις και παίζεις με μουσική φόντου, high scores και εύκολο περιβάλλον, ιδανικό για παιδιά από 8 ετών.
 
 **English:**
 A child-friendly Greek mythology quiz featuring the labors of Heracles and other heroes. Learn and play with background music, high scores, and a simple environment, ideal for kids aged 8 and up.
 
----
-
-Εάν θέλεις, μπορώ να **ανεβάσω έτοιμο GitHub repo structure με README.md και τον HTML έτοιμο** για άμεσο ανέβασμα. Πες μου αν το επιθυμείς.
