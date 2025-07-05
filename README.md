@@ -1,4 +1,5 @@
 Ταξίδι στους Μύθους (Journey through Myths)
+================================================
 Μια διαδραστική εφαρμογή κουίζ γνώσεων για παιδιά, με θέμα την ελληνική μυθολογία. Οι παίκτες μπορούν να επιλέξουν τον αγαπημένο τους ήρωα και να δοκιμάσουν τις γνώσεις τους απαντώντας σε ερωτήσεις.
 
 Περιεχόμενα
@@ -93,9 +94,14 @@ JavaScript: Για τη λογική του παιχνιδιού, τη διαχ�
 
                                                    ENGLISH 
 =================================================================================                                                
-Journey through Myths
 
-An interactive knowledge quiz application for children, focused on Greek mythology. Players can choose their favorite hero and test their knowledge by answering questions.
+
+Journey through Myths
+===============================================
+
+
+An interactive knowledge quiz application for children, focused on Greek mythology. 
+Players can choose their favorite hero and test their knowledge by answering questions.
 
 Table of Contents
 
