@@ -643,6 +643,8 @@
         // Μουσική - Ενημερωμένη υλοποίηση με Audio Object για πιο αξιόπιστο Play/Pause
         function initializeMusic() {
             if (!backgroundMusic) {
+                // *** ΕΔΩ ΒΑΛΤΕ ΤΟ ΔΙΚΟ ΣΑΣ ΑΡΧΕΙΟ ΜΟΥΣΙΚΗΣ ***
+                // Ένα παράδειγμα δημόσιου αρχείου MP3:
                 backgroundMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); 
                 backgroundMusic.loop = true;
                 backgroundMusic.volume = 0.3; // Ρυθμίστε την ένταση
@@ -822,10 +824,15 @@
             document.getElementById('finalScore').textContent = score;
             
             // Εύρεση κατάλληλου μηνύματος
-            let message = resultMessages[0];
-            for (let threshold in resultMessages) {
+          let message = resultMessages[0]; // Default message if no other condition is met
+            
+            // Get the keys (scores) as an array, convert them to numbers, and sort in descending order
+            const sortedThresholds = Object.keys(resultMessages).map(Number).sort((a, b) => b - a);
+
+            for (let i = 0; i < sortedThresholds.length; i++) {
+                const threshold = sortedThresholds[i];
                 if (score >= threshold) {
-                    message = resultMessages[threshold];
+                    message = resultMessages[String(threshold)]; // Use String(threshold) to access the object key
                     break;
                 }
             }
