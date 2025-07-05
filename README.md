@@ -92,7 +92,7 @@ JavaScript: Για τη λογική του παιχνιδιού, τη διαχ�
 
 
                                                    ENGLISH 
-=======================================================================================================                                                
+============================================================================================                                                
 Journey through Myths
 
 An interactive knowledge quiz application for children, focused on Greek mythology. Players can choose their favorite hero and test their knowledge by answering questions.
